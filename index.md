@@ -1,6 +1,6 @@
 ---
-title: Manipulability Motion Control
-description: A Purely-Reactive Manipulability-Maximising Motion Controller
+title: NEO
+description: A Novel Expeditious Optimisation Algorithm for Reactive Motion Control of Manipulators
 ---
 
 ### _Jesse Haviland and Peter Corke_
