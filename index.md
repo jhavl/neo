@@ -7,13 +7,11 @@ description: A Novel Expeditious Optimisation Algorithm for Reactive Motion Cont
 
 **Under Review**
 
-**[Preprint Avaliable Here](https://arxiv.org/abs/2002.11901)**
-
-MMC is designed for serial-link manipulators which have more degrees-of-freedom than nessecary to access their entire task space. Examples of these redunant robots include the Franka-Emika Panda, Kuka LBR iiwa, Rethink Robotics Sawyer, and the Kinova Gen3.
+**[Preprint Avaliable Here](https://arxiv.org/abs/2010.08686)**
 
 ![Cover Image](/images/cover_lite.svg)
 
-Resolved-rate motion control of redundant serial-link manipulators is commonly achieved using the Moore-Penrose pseudoinverse in which the norm of the control input is minimized. However, as kinematic singularities are a significant issue for robotic manipulators, we propose a Manipulability Motion Controller which chooses joint velocities which will also increase the manipulability of the robot. The manipulability measure has a complex non-linear relationship with the robot's joint configuration and in this paper we derive the manipulability Jacobian which directly relates joint velocities to the rate of change of  manipulability. Furthermore, we use the manipulability Jacobian within a constrained quadratic program to create an improved resolved-rate motion controller for redundant robots. The resulting real-time controller provides joint velocities which achieve a desired Cartesian end-effector velocity while also maximising the robot's manipulability.
+We present NEO, a fast and purely reactive motion controller for manipulators which can avoid static and dynamic obstacles while moving to the desired end-effector pose. Additionally, our controller maximises the manipulability of the robot during the trajectory, while avoiding joint position and velocity limits. NEO is wrapped into a strictly convex quadratic programme which, when considering obstacles, joint limits, and manipulability on a 7 degree-of-freedom robot, is generally solved in a few ms. While NEO is not intended to replace state-of-the-art motion planners, our experiments show that it is a viable alternative for scenes with moderate complexity while also being capable of reactive control. For more complex scenes, NEO is better suited as a  reactive local controller, in conjunction with a global motion planner. We compare NEO to motion planners on a standard benchmark in simulation and additionally illustrate and verify its operation on a physical robot in a dynamic environment. We provide an open-source library which implements our controller.
 
 <br>
 
@@ -21,111 +19,17 @@ Resolved-rate motion control of redundant serial-link manipulators is commonly a
 
 <br>
 
-* * *
-
-## What is Manipulability?
-
-The manipulability measure describes how well-conditioned the manipulator is to achieve an arbitrary velocity. It is a scalar which describes the volume of a 6-dimensional ellipsoid created using the kinematic Jacobian. If this ellipsoid has a large volume and is close to spherical, then the manipulator can achieve any arbitrary end-effector velocity easily. However, this 6-dimensional ellipsoid is impossible to display.
-
-The first three rows of the kinematic Jacobian represent the translational component of the end-effector velocity. While the last three rows represent the end-effector angular velocity. Therefore, by using only the first or last three rows of the kinematic Jacobian, the 3-dimensional translation or angular velocity ellipsoids respectively can be found and visualised. For example, see the two translational velocity ellipsoids displayed Below created at two different robot configurations.
-
-The ellipsoid has three radii, along its principle axes. A small radius about an axis represents the robots inability to achieve a velocity in the corresponding direction. At a singularity, the ellipsoid's radius becomes zero about the corresponding axis. Therefore the volume becomes zero. If the manipulator's configuration is well conditioned, these ellipsoids will have a larger volume.
-
-![Manipulability](/images/wide_lite.svg)
-> End-effector angular velocity ellipsoids created using the kinematic Jacobian at two different robot configurations **q**<sub>1</sub> and **q**<sub>2</sub>, on a Panda robot. The ellipsoid depicts how easily the robot's end-effector can move with an arbitrary  angular velocity. The left ellipsoid shows the manipulator's configuration is well conditioned to rotate the end-effector in any direction. While the right configuration is near singular as the end-effector will struggle to rotate around the y or z-axis. This directly corresponds to the manipulability denoted by _m_<sub>1</sub>, and _m_<sub>2</sub>.
 
 * * *
 
 ## How do I use it?
 
-We have a created a robotics Python library called [ropy](https://github.com/jhavl/ropy) which allows our algorithm to be used an any robot. See [ropy](https://github.com/jhavl/ropy) for installation instructions. We use the library [qpsolvers](https://pypi.org/project/qpsolvers/) to solve the optimisation function. However, you can use whichever solver you wish.
+We have incorporated required functionality into the [Robotics Toolbox for Python](https://github.com/petercorke/robotics-toolbox-python) which allows our algorithm to be used an any robot. See [Robotics Toolbox for Python](https://github.com/petercorke/robotics-toolbox-python) for installation instructions. We use the library [qpsolvers](https://pypi.org/project/qpsolvers/) to solve the optimisation function. However, you can use whichever solver you wish.
 
-### Basic Example
-```python
-import ropy as rp
-import numpy as np
-import qpsolvers as qp
-
-# Initialise a Franka-Emika Panda Robot
-panda = rp.Panda()
-
-# The current joint angles of the Panda
-panda.q = np.array([0, -3, 0, -2.3, 0, 2, 0])
-
-# The desired end-effecor spatial velocity
-v = np.array([0.05, 0.05, 0, 0, 0, 0.05])
-
-# Form the equality constraints
-# The kinematic Jacobian in the end-effecor frame
-Aeq = panda.Je
-beq = v
-
-# Gain term (lambda) for control minimisation
-Y = 0.005
-
-# Quadratic component of objective function
-Q = Y * np.eye(7)
-
-# Linear component of objective function: the manipulability Jacobian
-c = -panda.Jm.reshape((7,))
-
-# Solve for the joint velocities dq
-dq = qp.solve_qp(Q, c, None, None, Aeq, beq)
-```
 
 ### Position-Based Servoing Example
 ```python
-import ropy as rp
-import numpy as np
-import qpsolvers as qp
-
-
-# Initialise a Franka-Emika Panda Robot
-panda = rp.Panda()
-
-# The current joint angles of the Panda
-# You need to obtain these from however you interfave with your robot
-# eg. ROS messages, PyRep etc.
-panda.q = np.array([0, -3, 0, -2.3, 0, 2, 0])
-
-# The current pose of the robot
-wTe = panda.T
-
-# The desired pose of the robot
-# = Current pose offset 20cm in the x-axis
-wTep = np.copy(wTe)
-wTep[0,3] += 0.2
-
-# Gain term (lambda) for control minimisation
-Y = 0.005
-
-# Quadratic component of objective function
-Q = Y * np.eye(7)
-
-arrived = False
-while not arrived:
-
-    # The current joint angles of the Panda
-    # You need to obtain these from however you interfave with your robot
-    # eg. ROS messages, PyRep etc.
-    panda.q = np.array([0, -3, 0, -2.3, 0, 2, 0])
-
-    # The desired end-effecor spatial velocity
-    v, arrived = rp.p_servo(wTe, wTep)
-
-    # Form the equality constraints
-    # The kinematic Jacobian in the end-effecor frame
-    Aeq = panda.Je
-    beq = v.reshape((6,))
-
-    # Linear component of objective function: the manipulability Jacobian
-    c = -panda.Jm.reshape((7,))
-
-    # Solve for the joint velocities dq
-    dq = qp.solve_qp(Q, c, None, None, Aeq, beq)
-
-    # Send the joint velocities to the robot
-    # eg. ROS messages, PyRep etc.
+soon
 ```
 
 ### Acknowledgements
