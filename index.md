@@ -15,7 +15,7 @@ We present NEO, a fast and purely reactive motion controller for manipulators wh
 
 <br>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/zBGLPoPNZ10" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jSLPJBr8QTY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <br>
 
