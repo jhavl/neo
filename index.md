@@ -28,7 +28,7 @@ We compared NEO to four state-of-the-art motion planners on a standard motion pl
 | Success           | 69.7%      | 81.8%   | 85.4%           | 75.8%         | 65.2%     |
 | Average Time (ms) | 9.8        | 191     | 615             | 1300          | 4910      |
 
-The above table represents success of 198 motion problems where a 7 degree-of-freedom Personal Robot 2 (PR2) arm must get between a defined starting configuration and final pose. The 198 problems are set in five different scenes where we provide implementations of these scenes using our simulator [Swift](https://github.com/jhavl/swift) and the [Robotics Toolbox for Python](https://github.com/petercorke/robotics-toolbox-python): Bookshelves, Counter Top, Industrial A, Industrial B, and Tunnel.
+The above table represents success of 198 motion problems where a 7 degree-of-freedom Personal Robot 2 (PR2) arm must get between a defined starting configuration and final pose. The 198 problems are set in five different scenes where we provide implementations of these scenes using our simulator [Swift](https://github.com/jhavl/swift) and the [Robotics Toolbox for Python](https://github.com/petercorke/robotics-toolbox-python): [Bookshelves](https://github.com/jhavl/neo/blob/master/examples/bookshelf.py), [Counter Top](https://github.com/jhavl/neo/blob/master/examples/counter.py), [Industrial A](https://github.com/jhavl/neo/blob/master/examples/industrial_a.py), [Industrial B](https://github.com/jhavl/neo/blob/master/examples/industrial_b.py), and [Tunnel](https://github.com/jhavl/neo/blob/master/examples/tunnel.py).
 
 * * *
 
