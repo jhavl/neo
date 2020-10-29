@@ -24,7 +24,22 @@ We present NEO, a fast and purely reactive motion controller for manipulators wh
 
 ## How do I use it?
 
-We have incorporated required functionality into the [Robotics Toolbox for Python](https://github.com/petercorke/robotics-toolbox-python) which allows our algorithm to be used an any robot. See [Robotics Toolbox for Python](https://github.com/petercorke/robotics-toolbox-python) for installation instructions. We use the library [qpsolvers](https://pypi.org/project/qpsolvers/) to solve the optimisation function. However, you can use whichever solver you wish.
+We have a created a robotics Python library called [Robotics Toolbox for Python](https://github.com/petercorke/robotics-toolbox-python) which allows our algorithm to be used an any robot. We use the library [qpsolvers](https://pypi.org/project/qpsolvers/) to solve the optimisation function. However, you can use whichever solver you wish.
+
+Install [Robotics Toolbox for Python](https://github.com/petercorke/robotics-toolbox-python) from github
+
+```shell
+git clone https://github.com/petercorke/robotics-toolbox-python.git
+cd robotics-toolbox-python
+pip3 install -e .[swift]
+```
+
+The following example uses our Swift simulator. Install [Swift](https://github.com/jhavl/swift) from github
+
+```shell
+git clone https://github.com/jhavl/swift.git
+cd swift
+pip3 install -e .
 
 
 ### Position-Based Servoing Example with Two Dynamic Obstacles
@@ -160,6 +175,19 @@ while not arrived:
 
     # Step the simulator by 50 ms
     env.step(50)
+```
+
+### Citation
+
+If you use this work, please cite:
+
+```
+@article{haviland2020neo,
+  title={NEO: A Novel Expeditious Optimisation Algorithm for Reactive Motion Control of Manipulators},
+  author={Haviland, Jesse and Corke, Peter},
+  journal={arXiv preprint arXiv:2010.08686},
+  year={2020}
+}
 ```
 
 ### Acknowledgements
