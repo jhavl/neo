@@ -9,6 +9,8 @@ description: A Novel Expeditious Optimisation Algorithm for Reactive Motion Cont
 
 **[Preprint Avaliable Here](https://arxiv.org/abs/2010.08686)**
 
+NEO can be used on any serial-link manipulator regardless of if it is redundant or not. This includes 7 degree-of-freedom robots such as the Fanka-Emika Panda and the 6 degree-of-freedom robots such as the Universal Robotics 5 manipulator. In short, our reactive controller can avoid static and dynamic obstacles, while maximising the manipulability of the robot, avoiding joint limits and guiding the end-effector to a desired pose.
+
 ![Cover Image](/images/cover_lite.svg)
 
 We present NEO, a fast and purely reactive motion controller for manipulators which can avoid static and dynamic obstacles while moving to the desired end-effector pose. Additionally, our controller maximises the manipulability of the robot during the trajectory, while avoiding joint position and velocity limits. NEO is wrapped into a strictly convex quadratic programme which, when considering obstacles, joint limits, and manipulability on a 7 degree-of-freedom robot, is generally solved in a few ms. While NEO is not intended to replace state-of-the-art motion planners, our experiments show that it is a viable alternative for scenes with moderate complexity while also being capable of reactive control. For more complex scenes, NEO is better suited as a  reactive local controller, in conjunction with a global motion planner. We compare NEO to motion planners on a standard benchmark in simulation and additionally illustrate and verify its operation on a physical robot in a dynamic environment. We provide an open-source library which implements our controller.
@@ -19,6 +21,14 @@ We present NEO, a fast and purely reactive motion controller for manipulators wh
 
 <br>
 
+We compared NEO to four state-of-the-art motion planners on a standard motion planning benchmark. As shown in the table below, NEO is a viable alternative to motion planning, while also being much faster. NEO does not perform as well as all other motion planners especially in close confined areas but does well in more open areas like bookshelves. Motion planners typically devise the whole motion before the robot starts moving making them slow and somewhat open-loop. This makes them less useful for tasks where the environment is dynamic or where the desired end-effector pose is changing. NEO, being a purely-reactive controller, excels at these scenarios. See the video above for examples of a robot being controlled by NEO dodging dynamic obstacles while tracking a moving desired end-effector pose.
+
+|                   | NEO (ours) | Trajopt | OMPL-RRTConnect | OMPL-LBKPIECE | CHOMP-HMC |
+|-------------------|------------|---------|-----------------|---------------|-----------|
+| Success           | 69.7%      | 81.8%   | 85.4%           | 75.8%         | 65.2%     |
+| Average Time (ms) | 9.8        | 191     | 615             | 1300          | 4910      |
+
+The above table represents success of 198 motion problems where a 7 degree-of-freedom Personal Robot 2 (PR2) arm must get between a defined starting configuration and final pose. The 198 problems are set in five different scenes where we provide implementations of these scenes using our simulator [Swift](https://github.com/jhavl/swift) and the [Robotics Toolbox for Python](https://github.com/petercorke/robotics-toolbox-python): Bookshelves, Counter Top, Industrial A, Industrial B, and Tunnel.
 
 * * *
 
