@@ -187,6 +187,8 @@ while not arrived:
     env.step(50)
 ```
 
+* * *
+
 ### Citation
 
 If you use this work, please cite:
