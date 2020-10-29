@@ -40,7 +40,7 @@ The following example uses our Swift simulator. Install [Swift](https://github.c
 git clone https://github.com/jhavl/swift.git
 cd swift
 pip3 install -e .
-
+```
 
 ### Position-Based Servoing Example with Two Dynamic Obstacles
 ```python
