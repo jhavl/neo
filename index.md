@@ -5,9 +5,10 @@ description: A Novel Expeditious Optimisation Algorithm for Reactive Motion Cont
 
 ### _Jesse Haviland and Peter Corke_
 
-**Under Review**
+IEEE Robotics and Automation Letters (RA-L), accepted January 2021.
 
 **[Preprint Avaliable Here](https://arxiv.org/abs/2010.08686)**
+**[IEEE Xplore](https://ieeexplore.ieee.org/document/9343718)**
 
 NEO can be used on any serial-link manipulator regardless of if it is redundant or not. This includes 7 degree-of-freedom robots such as the Fanka-Emika Panda and the 6 degree-of-freedom robots such as the Universal Robotics 5 manipulator. In short, our reactive controller can avoid static and dynamic obstacles, while maximising the manipulability of the robot, avoiding joint limits and guiding the end-effector to a desired pose.
 
