@@ -198,11 +198,14 @@ If you use this work, please cite:
 
 ```
 @article{haviland2020neo,
+  author={J. {Haviland} and P. {Corke}},
   journal={IEEE Robotics and Automation Letters}, 
-  title={NEO: A Novel Expeditious Optimisation Algorithm for Reactive Motion Control of Manipulators},
-  author={Haviland, Jesse and Corke, Peter},
+  title={NEO: A Novel Expeditious Optimisation Algorithm for Reactive Motion Control of Manipulators}, 
   year={2021},
-  doi={10.1109/LRA.2021.3056060}
+  volume={6},
+  number={2},
+  pages={1043-1050},
+  doi={10.1109/LRA.2021.3056060}}
 }
 ```
 
