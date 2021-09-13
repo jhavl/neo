@@ -3,8 +3,10 @@
 @author Jesse Haviland
 """
 
-import roboticstoolbox as rp
+import roboticstoolbox as rtb
 import spatialmath as sm
+import spatialgeometry as sg
+import swift
 import numpy as np
 import time
 
@@ -16,26 +18,26 @@ q3 = [0.3398, -0.2349, -0.0415, -1.5042,  2.7647, -1.7995,  3.0539]
 qs = [q0, q1, q2, q3]
 
 # Collisions
-s1 = rp.Box(
+s1 = sm.Cuboid(
     scale=[0.6, 0.04, 0.6],
     base=sm.SE3(0.65, -0.15, 0.43))
 
-s2 = rp.Box(
+s2 = sm.Cuboid(
     scale=[0.6, 0.04, 0.6],
     base=sm.SE3(0.65, -0.15, 1.22))
 
-s3 = rp.Box(
+s3 = sm.Cuboid(
     scale=[0.3, 0.04, 0.2],
     base=sm.SE3(0.8, -0.15, 0.83))
 
 s = [s1, s2, s3]
 
 # Launch Simulator
-env = rp.backend.Swift()
+env = swift.Swift()
 env.launch()
 
 # Make PR2 and set joint angles
-r = rp.models.PR2()
+r = rtb.models.PR2()
 r.q = [
     0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
     0.16825, 0.0, 0.0, 0.0, -0.37279882212870064, 1.0259015008778194,

@@ -3,8 +3,10 @@
 @author Jesse Haviland
 """
 
-import roboticstoolbox as rp
+import roboticstoolbox as rtb
 import spatialmath as sm
+import spatialgeometry as sg
+import swift
 import numpy as np
 import time
 
@@ -21,211 +23,211 @@ q8 = [-0.0077, -0.1813, -1.2825, -0.2072, -2.475, -0.3674, -2.5659]
 qs = [q0, q1, q2, q3, q4, q5, q6, q7, q8]
 
 # Collisions
-s1 = rp.Box(
+s1 = sm.Cuboid(
     scale=[0.60, 0.71, 0.02],
     base=sm.SE3(0.30, 0.355, 1.50))
 
-s2 = rp.Box(
+s2 = sm.Cuboid(
     scale=[0.70, 0.02, 0.90],
     base=sm.SE3(0.65, 0.01, 1.06))
 
-s3 = rp.Box(
+s3 = sm.Cuboid(
     scale=[0.59, 0.70, 0.02],
     base=sm.SE3(0.30, 0.35, 1.23))
 
-s4 = rp.Box(
+s4 = sm.Cuboid(
     scale=[0.59, 0.70, 0.02],
     base=sm.SE3(0.30, 0.35, 0.92))
 
-s5 = rp.Box(
+s5 = sm.Cuboid(
     scale=[0.59, 0.70, 0.02],
     base=sm.SE3(0.30, 0.35, 0.60))
 
-s6 = rp.Box(
+s6 = sm.Cuboid(
     scale=[0.02, 0.70, 0.60],
     base=sm.SE3(0.60, 0.35, 0.30))
 
-s7 = rp.Box(
+s7 = sm.Cuboid(
     scale=[0.07, 0.03, 0.03],
     base=sm.SE3(0.63, 0.20, 0.55))
 
-s8 = rp.Box(
+s8 = sm.Cuboid(
     scale=[0.07, 0.03, 0.03],
     base=sm.SE3(0.63, 0.50, 0.55))
 
-s9 = rp.Box(
+s9 = sm.Cuboid(
     scale=[0.03, 0.30, 0.03],
     base=sm.SE3(0.65, 0.35, 0.55))
 
-s10 = rp.Box(
+s10 = sm.Cuboid(
     scale=[0.60, 0.02, 1.5],
     base=sm.SE3(0.30, 0.01, 0.75))
 
-s11 = rp.Box(
+s11 = sm.Cuboid(
     scale=[0.60, 0.02, 1.5],
     base=sm.SE3(0.30, 0.70, 0.75))
 
-s12 = rp.Box(
+s12 = sm.Cuboid(
     scale=[0.02, 0.70, 1.5],
     base=sm.SE3(0.02, 0.35, 0.75))
 
-s13 = rp.Box(
+s13 = sm.Cuboid(
     scale=[0.60, 0.60, 0.02],
     base=sm.SE3(0.30, 1.01, 0.75))
 
-s14 = rp.Box(
+s14 = sm.Cuboid(
     scale=[0.60, 0.52, 0.02],
     base=sm.SE3(0.30, 2.14, 0.75))
 
-s15 = rp.Box(
+s15 = sm.Cuboid(
     scale=[0.60, 0.60, 0.02],
     base=sm.SE3(0.30, 1.60, 0.50))
 
-s16 = rp.Box(
+s16 = sm.Cuboid(
     scale=[0.60, 0.02, 0.25],
     base=sm.SE3(0.30, 1.30, 0.625))
 
-s17 = rp.Box(
+s17 = sm.Cuboid(
     scale=[0.60, 0.02, 0.25],
     base=sm.SE3(0.30, 1.90, 0.625))
 
-s18 = rp.Box(
+s18 = sm.Cuboid(
     scale=[0.02, 2.4, 2.0],
     base=sm.SE3(0.01, 1.20, 1.0))
 
-s19 = rp.Box(
+s19 = sm.Cuboid(
     scale=[0.02, 0.62, 0.76],
     base=sm.SE3(0.03, 1.60, 0.38))
 
-s20 = rp.Box(
+s20 = sm.Cuboid(
     scale=[0.02, 0.64, 0.76],
     base=sm.SE3(0.60, 1.60, 0.38))
 
-s21 = rp.Box(
+s21 = sm.Cuboid(
     scale=[0.08, 0.60, 0.02],
     base=sm.SE3(0.04, 1.60, 0.75))
 
-s22 = rp.Box(
+s22 = sm.Cuboid(
     scale=[0.03, 0.03, 0.06],
     base=sm.SE3(0.04, 1.70, 0.78))
 
-s23 = rp.Box(
+s23 = sm.Cuboid(
     scale=[0.03, 0.03, 0.06],
     base=sm.SE3(0.04, 1.50, 0.78))
 
-s24 = rp.Box(
+s24 = sm.Cuboid(
     scale=[0.03, 0.03, 0.30],
     base=sm.SE3(0.04, 1.60, 0.90))
 
-s25 = rp.Box(
+s25 = sm.Cuboid(
     scale=[0.25, 0.03, 0.03],
     base=sm.SE3(0.15, 1.60, 1.05))
 
-s26 = rp.Box(
+s26 = sm.Cuboid(
     scale=[0.02, 0.02, 0.05],
     base=sm.SE3(0.265, 1.60, 1.025))
 
-s27 = rp.Box(
+s27 = sm.Cuboid(
     scale=[0.40, 0.02, 0.70],
     base=sm.SE3(0.20, 0.74, 1.55))
 
-s28 = rp.Box(
+s28 = sm.Cuboid(
     scale=[0.40, 0.02, 0.70],
     base=sm.SE3(0.20, 2.39, 1.55))
 
-s29 = rp.Box(
+s29 = sm.Cuboid(
     scale=[0.40, 0.02, 0.70],
     base=sm.SE3(0.20, 1.62, 1.55))
 
-s30 = rp.Box(
+s30 = sm.Cuboid(
     scale=[0.40, 1.67, 0.02],
     base=sm.SE3(0.20, 1.565, 1.20))
 
-s31 = rp.Box(
+s31 = sm.Cuboid(
     scale=[0.40, 1.67, 0.02],
     base=sm.SE3(0.20, 1.565, 1.90))
 
-s32 = rp.Box(
+s32 = sm.Cuboid(
     scale=[0.40, 1.67, 0.02],
     base=sm.SE3(0.20, 1.565, 1.55))
 
-s33 = rp.Box(
+s33 = sm.Cuboid(
     scale=[0.60, 0.02, 0.76],
     base=sm.SE3(0.30, 1.29, 0.38))
 
-s34 = rp.Box(
+s34 = sm.Cuboid(
     scale=[0.60, 0.02, 0.76],
     base=sm.SE3(0.30, 0.72, 0.38))
 
-s35 = rp.Box(
+s35 = sm.Cuboid(
     scale=[0.02, 0.6, 0.75],
     base=sm.SE3(0.02, 1.00, 0.37))
 
-s36 = rp.Box(
+s36 = sm.Cuboid(
     scale=[0.60, 0.6, 0.02],
     base=sm.SE3(0.30, 1.00, 0.35))
 
-s37 = rp.Box(
+s37 = sm.Cuboid(
     scale=[0.60, 0.6, 0.02],
     base=sm.SE3(0.30, 1.00, 0.01))
 
-s38 = rp.Box(
+s38 = sm.Cuboid(
     scale=[0.04, 0.04, 0.24],
     base=sm.SE3(0.43, 1.92, 0.87))
 
-s39 = rp.Box(
+s39 = sm.Cuboid(
     scale=[0.05, 0.05, 0.16],
     base=sm.SE3(0.45, 1.97, 0.81))
 
-s40 = rp.Box(
+s40 = sm.Cuboid(
     scale=[0.06, 0.06, 0.32],
     base=sm.SE3(0.36, 1.94, 0.92))
 
-s41 = rp.Box(
+s41 = sm.Cuboid(
     scale=[0.60, 0.02, 0.75],
     base=sm.SE3(0.30, 2.39, 0.375))
 
-s42 = rp.Box(
+s42 = sm.Cuboid(
     scale=[0.60, 0.02, 0.75],
     base=sm.SE3(0.30, 1.91, 0.375))
 
-s43 = rp.Box(
+s43 = sm.Cuboid(
     scale=[0.02, 0.48, 0.16],
     base=sm.SE3(0.60, 2.16, 0.08))
 
-s44 = rp.Box(
+s44 = sm.Cuboid(
     scale=[0.02, 0.48, 0.08],
     base=sm.SE3(0.61, 2.16, 0.72))
 
-s45 = rp.Box(
+s45 = sm.Cuboid(
     scale=[0.02, 0.48, 0.74],
     base=sm.SE3(0.02, 2.15, 0.35))
 
-s46 = rp.Box(
+s46 = sm.Cuboid(
     scale=[0.60, 0.48, 0.02],
     base=sm.SE3(0.90, 2.16, 0.16))
 
-s47 = rp.Box(
+s47 = sm.Cuboid(
     scale=[0.56, 0.48, 0.02],
     base=sm.SE3(0.30, 2.15, 0.10))
 
-s48 = rp.Box(
+s48 = sm.Cuboid(
     scale=[0.03, 0.03, 0.07],
     base=sm.SE3(1.10, 2.00, 0.12))
 
-s49 = rp.Box(
+s49 = sm.Cuboid(
     scale=[0.03, 0.03, 0.07],
     base=sm.SE3(1.10, 2.3, 0.12))
 
-s50 = rp.Box(
+s50 = sm.Cuboid(
     scale=[0.03, 0.33, 0.03],
     base=sm.SE3(1.10, 2.15, 0.08))
 
-s51 = rp.Box(
+s51 = sm.Cuboid(
     scale=[0.2, 0.03, 0.26],
     base=sm.SE3(0.38, 2.34, 0.89))
 
-s52 = rp.Box(
+s52 = sm.Cuboid(
     scale=[0.2, 0.02, 0.3],
     base=sm.SE3(0.41, 2.37, 0.92))
 
@@ -237,11 +239,11 @@ s = [s1, s2, s3, s4, s5, s6, s7, s8, s9,
      s50, s51, s52]
 
 # Launch Simulator
-env = rp.backend.Swift()
+env = swift.Swift()
 env.launch()
 
 # Make PR2 and set joint angles
-r = rp.models.PR2()
+r = rtb.models.PR2()
 r.q = [
     0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.16825, 0.0,
     0.0, 0.0, -0.8451866735633127, 0.08128204585620136, -1.8311522093787793,

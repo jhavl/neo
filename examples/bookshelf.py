@@ -3,8 +3,10 @@
 @author Jesse Haviland
 """
 
-import roboticstoolbox as rp
+import roboticstoolbox as rtb
+import spatialgeometry as sg
 import spatialmath as sm
+import swift
 import time
 
 # Configurations
@@ -21,38 +23,38 @@ q9 = [0.2743,  0.4088, -0.5291, -0.4304, -0.9985, -1.0032, -1.7278]
 qs = [q0, q1, q2, q3, q4, q5, q6, q7, q8, q9]
 
 # Collisions
-s1 = rp.Box(
+s1 = sg.Cuboid(
     scale=[0.60, 1.1, 0.02],
     base=sm.SE3(0.95, 0, 0.20))
 
-s2 = rp.Box(
+s2 = sg.Cuboid(
     scale=[0.60, 1.1, 0.02],
     base=sm.SE3(0.95, 0, 0.60))
 
-s3 = rp.Box(
+s3 = sg.Cuboid(
     scale=[0.60, 1.1, 0.02],
     base=sm.SE3(0.95, 0, 1.00))
 
-s4 = rp.Box(
+s4 = sg.Cuboid(
     scale=[0.60, 1.1, 0.02],
     base=sm.SE3(0.95, 0, 1.40))
 
-s5 = rp.Box(
+s5 = sg.Cuboid(
     scale=[0.60, 0.02, 1.40],
     base=sm.SE3(0.95, 0.55, 0.7))
 
-s6 = rp.Box(
+s6 = sg.Cuboid(
     scale=[0.60, 0.02, 1.40],
     base=sm.SE3(0.95, -0.55, 0.7))
 
 s = [s1, s2, s3, s4, s5, s6]
 
 # Launch Simulator
-env = rp.backend.Swift()
+env = swift.Swift()
 env.launch()
 
 # Make PR2 and set joint angles
-r = rp.models.PR2()
+r = rtb.models.PR2()
 r.q = [
     0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
     0.0, 0.16825, 0.0, 0.0, 0.0, -0.5652894131595758, -0.1940789551546196,

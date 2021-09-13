@@ -3,8 +3,10 @@
 @author Jesse Haviland
 """
 
-import roboticstoolbox as rp
+import roboticstoolbox as rtb
 import spatialmath as sm
+import spatialgeometry as sg
+import swift
 import numpy as np
 import time
 
@@ -24,71 +26,71 @@ q11 = [-0.3888,  1.0477, -1.1405, -0.7096,  0.9253, -0.5049, -0.3575]
 qs = [q0, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11]
 
 # Collisions
-s1 = rp.Box(
+s1 = sm.Cuboid(
     scale=[0.4, 1.4, 0.02],
     base=sm.SE3(0.75, -0.1, 0.7))
 
-s2 = rp.Box(
+s2 = sm.Cuboid(
     scale=[1.1, 0.3, 0.02],
     base=sm.SE3(0.4, -0.65, 0.7))
 
-s3 = rp.Box(
+s3 = sm.Cuboid(
     scale=[0.02, 0.2, 0.3],
     base=sm.SE3(0.1, -0.7, 0.85))
 
-s4 = rp.Box(
+s4 = sm.Cuboid(
     scale=[0.02, 0.2, 0.3],
     base=sm.SE3(0.3, -0.7, 0.85))
 
-s5 = rp.Box(
+s5 = sm.Cuboid(
     scale=[0.02, 0.2, 0.3],
     base=sm.SE3(0.5, -0.7, 0.85))
 
-s6 = rp.Box(
+s6 = sm.Cuboid(
     scale=[0.42, 0.3, 0.02],
     base=sm.SE3(0.3, -0.65, 0.71))
 
-s7 = rp.Box(
+s7 = sm.Cuboid(
     scale=[0.02, 0.1, 0.06],
     base=sm.SE3(0.1, -0.55, 0.73))
 
-s8 = rp.Box(
+s8 = sm.Cuboid(
     scale=[0.02, 0.1, 0.06],
     base=sm.SE3(0.3, -0.55, 0.73))
 
-s9 = rp.Box(
+s9 = sm.Cuboid(
     scale=[0.02, 0.1, 0.06],
     base=sm.SE3(0.5, -0.55, 0.73))
 
-s10 = rp.Box(
+s10 = sm.Cuboid(
     scale=[0.42, 0.02, 0.06],
     base=sm.SE3(0.3, -0.5, 0.73))
 
-s11 = rp.Box(
+s11 = sm.Cuboid(
     scale=[0.42, 0.02, 0.06],
     base=sm.SE3(0.3, -0.59, 0.93))
 
-s12 = rp.Box(
+s12 = sm.Cuboid(
     scale=[0.42, 0.02, 0.34],
     base=sm.SE3(0.3, -0.79, 0.87))
 
-s13 = rp.Box(
+s13 = sm.Cuboid(
     scale=[0.42, 0.2, 0.02],
     base=sm.SE3(0.3, -0.7, 0.9))
 
-s14 = rp.Box(
+s14 = sm.Cuboid(
     scale=[0.3, 0.02, 0.45],
     base=sm.SE3(0.8, 0.25, 0.925))
 
-s15 = rp.Box(
+s15 = sm.Cuboid(
     scale=[0.3, 0.02, 0.45],
     base=sm.SE3(0.8, -0.25, 0.925))
 
-s16 = rp.Box(
+s16 = sm.Cuboid(
     scale=[0.3, 0.52, 0.02],
     base=sm.SE3(0.8, -0.00, 1.16))
 
-s17 = rp.Box(
+s17 = sm.Cuboid(
     scale=[0.42, 0.02, 0.34],
     base=sm.SE3(0.3, -0.79, 0.87))
 
@@ -96,11 +98,11 @@ s = [s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12,
      s13, s14, s15, s16, s17]
 
 # Launch Simulator
-env = rp.backend.Swift()
+env = swift.Swift()
 env.launch()
 
 # Make PR2 and set joint angles
-r = rp.models.PR2()
+r = rtb.models.PR2()
 r.q = [
     0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
     0.16825, 0.0, 0.0, 0.0, 0.4521781848795534, -0.06875607890205337,
