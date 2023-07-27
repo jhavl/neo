@@ -3,7 +3,7 @@ title: NEO
 description: A Novel Expeditious Optimisation Algorithm for Reactive Motion Control of Manipulators
 ---
 
-### _Jesse Haviland and Peter Corke_
+### _[Jesse Haviland](https://jhavl.com/) and [Peter Corke](https://petercorke.com/)_
 
 IEEE Robotics and Automation Letters (RA-L), accepted January 2021.
 
